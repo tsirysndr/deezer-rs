@@ -32,10 +32,12 @@ pub struct Deezer {
     pub user: user::UserService,
 }
 
+const BASE_URL: &str = "https://api.deezer.com/";
+
 impl Deezer {
     pub fn new() -> Self {
         let client: Client = Config::new()
-            .set_base_url(Url::parse("https://api.deezer.com/").unwrap())
+            .set_base_url(Url::parse(BASE_URL).unwrap())
             .set_timeout(Some(Duration::from_secs(5)))
             .try_into()
             .unwrap();
