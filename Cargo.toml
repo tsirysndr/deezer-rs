@@ -3,7 +3,14 @@ name = "deezer-rs"
 version = "0.1.0"
 edition = "2018"
 
+[[example]]
+name = "simple"
+path = "examples/simple.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 surf = "2.3.1"
+serde = "1.0.130"
+serde_json = "1.0.68"
+tokio = "1.12.0"

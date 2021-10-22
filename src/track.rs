@@ -10,4 +10,6 @@ impl TrackService {
             client: client.clone(),
         }
     }
+
+    pub fn get(&self, id: &str) {}
 }

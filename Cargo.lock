@@ -407,7 +407,10 @@ dependencies = [
 name = "deezer-rs"
 version = "0.1.0"
 dependencies = [
+ "serde",
+ "serde_json",
  "surf",
+ "tokio",
 ]
 
 [[package]]
@@ -1399,6 +1402,16 @@ name = "tinyvec_macros"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cda74da7e1a664f795bb1f8a87ec406fb89a02522cf6e50620d016add6dbbf5c"
+
+[[package]]
+name = "tokio"
+version = "1.12.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c2c2416fdedca8443ae44b4527de1ea633af61d8f7169ffa6e72c5b53d24efcc"
+dependencies = [
+ "autocfg",
+ "pin-project-lite",
+]
 
 [[package]]
 name = "tracing"

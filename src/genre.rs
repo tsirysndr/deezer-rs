@@ -10,4 +10,10 @@ impl GenreService {
             client: client.clone(),
         }
     }
+
+    pub fn get(&self, id: &str) {}
+
+    pub fn list(&self) {}
+
+    pub fn get_artists(&self, id: &str) {}
 }

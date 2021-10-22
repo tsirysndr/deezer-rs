@@ -10,4 +10,12 @@ impl ChartService {
       client: client.clone(),
     }
   }
+
+  pub fn get_tracks(&self) {}
+
+  pub fn get_albums(&self) {}
+
+  pub fn get_artists(&self) {}
+
+  pub fn get_playlists(&self) {}
 }
