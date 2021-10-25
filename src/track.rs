@@ -3,18 +3,18 @@ use surf::Client;
 
 #[derive(Debug, Deserialize)]
 pub struct Track {
-    pub id: u32,
+    pub id: u64,
     pub readable: bool,
     pub title: String,
     pub title_short: String,
-    pub title_version: String,
-    pub isrc: String,
-    pub link: String,
+    pub title_version: Option<String>,
+    pub isrc: Option<String>,
+    pub link: Option<String>,
     pub duration: u32,
     pub rank: Option<u32>,
     pub explicit_lyrics: bool,
-    pub explicit_content_lyrics: u32,
-    pub explicit_content_cover: u32,
+    pub explicit_content_lyrics: Option<u32>,
+    pub explicit_content_cover: Option<u32>,
     pub preview: String,
     pub r#type: String,
 }

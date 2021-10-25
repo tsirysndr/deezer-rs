@@ -1,52 +1,39 @@
 use crate::track::Tracks;
+use crate::user::Users;
 use serde::Deserialize;
 use surf::Client;
 
 #[derive(Debug, Deserialize)]
 pub struct Album {
-  pub id: u32,
+  pub id: u64,
   pub title: String,
-  pub upc: String,
+  pub upc: Option<String>,
   pub link: String,
-  pub share: String,
+  pub share: Option<String>,
   pub cover: String,
   pub cover_small: String,
   pub cover_medium: String,
   pub cover_big: String,
   pub cover_xl: String,
   pub genre_id: u32,
-  pub label: String,
-  pub nb_tracks: u32,
-  pub duration: u32,
+  pub label: Option<String>,
+  pub nb_tracks: Option<u32>,
+  pub duration: Option<u32>,
   pub fans: u32,
   pub rating: Option<u32>,
   pub release_date: String,
   pub record_type: String,
-  pub available: bool,
+  pub available: Option<bool>,
   pub tracklist: String,
   pub explicit_lyrics: bool,
-  pub explicit_content_lyrics: u32,
-  pub explicit_content_cover: u32,
+  pub explicit_content_lyrics: Option<u32>,
+  pub explicit_content_cover: Option<u32>,
   pub r#type: String,
 }
 
 #[derive(Debug, Deserialize)]
-pub struct Fan {
-  pub id: u32,
-  pub name: String,
-  pub link: String,
-  pub picture: String,
-  pub picture_small: String,
-  pub picture_medium: String,
-  pub picture_big: String,
-  pub picture_xl: String,
-  pub tracklist: String,
-  pub r#type: String,
-}
-
-#[derive(Debug, Deserialize)]
-pub struct Fans {
-  pub data: Vec<Fan>,
+pub struct Albums {
+  pub data: Vec<Album>,
 }
 
 pub struct AlbumService {
@@ -69,11 +56,11 @@ impl AlbumService {
     Ok(res)
   }
 
-  pub async fn get_fans(&self, id: &str) -> Result<Fans, surf::Error> {
+  pub async fn get_fans(&self, id: &str) -> Result<Users, surf::Error> {
     let res = self
       .client
       .get(format!("/album/{}/fans", id))
-      .recv_json::<Fans>()
+      .recv_json::<Users>()
       .await?;
     Ok(res)
   }
