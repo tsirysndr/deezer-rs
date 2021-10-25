@@ -5,7 +5,6 @@ use surf::{Client, Config, Url};
 pub mod album;
 pub mod artist;
 pub mod chart;
-pub mod comment;
 pub mod editorial;
 pub mod genre;
 pub mod infos;
@@ -20,7 +19,6 @@ pub struct Deezer {
     pub album: album::AlbumService,
     pub artist: artist::ArtistService,
     pub chart: chart::ChartService,
-    pub comment: comment::CommentService,
     pub editorial: editorial::EditorialService,
     pub genre: genre::GenreService,
     pub infos: infos::InfosService,
@@ -45,7 +43,6 @@ impl Deezer {
             album: album::AlbumService::new(&client),
             artist: artist::ArtistService::new(&client),
             chart: chart::ChartService::new(&client),
-            comment: comment::CommentService::new(&client),
             editorial: editorial::EditorialService::new(&client),
             genre: genre::GenreService::new(&client),
             infos: infos::InfosService::new(&client),
