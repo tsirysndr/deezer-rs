@@ -17,6 +17,9 @@ async fn main() {
   let chart_albums = client.chart.get_albums().await;
   let chart_artists = client.chart.get_artists().await;
   let chart_playlists = client.chart.get_playlists().await;
+  let genre = client.genre.get("0").await;
+  let genres = client.genre.list().await;
+  let genre_artists = client.genre.get_artists("0").await;
 
   println!("{:#?}\n", album.unwrap());
   println!("{:#?}\n", fans.unwrap());
@@ -32,4 +35,7 @@ async fn main() {
   println!("{:#?}\n", chart_albums.unwrap());
   println!("{:#?}\n", chart_artists.unwrap());
   println!("{:#?}\n", chart_playlists.unwrap());
+  println!("{:#?}\n", genre.unwrap());
+  println!("{:#?}\n", genres.unwrap());
+  println!("{:#?}\n", genre_artists.unwrap());
 }
