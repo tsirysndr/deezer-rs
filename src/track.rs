@@ -4,7 +4,7 @@ use surf::Client;
 #[derive(Debug, Deserialize)]
 pub struct Track {
     pub id: u64,
-    pub readable: bool,
+    pub readable: Option<bool>,
     pub title: String,
     pub title_short: String,
     pub title_version: Option<String>,

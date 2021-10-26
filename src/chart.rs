@@ -1,3 +1,7 @@
+use crate::album::Albums;
+use crate::artist::Artists;
+use crate::playlist::Playlists;
+use crate::track::Tracks;
 use surf::Client;
 
 pub struct ChartService {
@@ -11,11 +15,39 @@ impl ChartService {
     }
   }
 
-  pub fn get_tracks(&self) {}
+  pub async fn get_tracks(&self) -> Result<Tracks, surf::Error> {
+    let res = self
+      .client
+      .get("/chart/0/tracks")
+      .recv_json::<Tracks>()
+      .await?;
+    Ok(res)
+  }
 
-  pub fn get_albums(&self) {}
+  pub async fn get_albums(&self) -> Result<Albums, surf::Error> {
+    let res = self
+      .client
+      .get("/chart/0/albums")
+      .recv_json::<Albums>()
+      .await?;
+    Ok(res)
+  }
 
-  pub fn get_artists(&self) {}
+  pub async fn get_artists(&self) -> Result<Artists, surf::Error> {
+    let res = self
+      .client
+      .get("/chart/0/artists")
+      .recv_json::<Artists>()
+      .await?;
+    Ok(res)
+  }
 
-  pub fn get_playlists(&self) {}
+  pub async fn get_playlists(&self) -> Result<Playlists, surf::Error> {
+    let res = self
+      .client
+      .get("/chart/0/playlists")
+      .recv_json::<Playlists>()
+      .await?;
+    Ok(res)
+  }
 }
