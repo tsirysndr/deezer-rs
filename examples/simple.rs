@@ -20,6 +20,10 @@ async fn main() {
   let genre = client.genre.get("0").await;
   let genres = client.genre.list().await;
   let genre_artists = client.genre.get_artists("0").await;
+  let radios_genres = client.radio.by_genre().await;
+  let radio_top = client.radio.get_top_radio().await;
+  let radios_tracks = client.radio.get_tracks("6").await;
+  let radios = client.radio.list().await;
 
   println!("{:#?}\n", album.unwrap());
   println!("{:#?}\n", fans.unwrap());
@@ -38,4 +42,8 @@ async fn main() {
   println!("{:#?}\n", genre.unwrap());
   println!("{:#?}\n", genres.unwrap());
   println!("{:#?}\n", genre_artists.unwrap());
+  println!("{:#?}\n", radios_genres.unwrap());
+  println!("{:#?}\n", radio_top.unwrap());
+  println!("{:#?}\n", radios_tracks.unwrap());
+  println!("{:#?}\n", radios.unwrap());
 }

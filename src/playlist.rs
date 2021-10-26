@@ -41,11 +41,19 @@ impl PlaylistService {
     }
   }
 
-  pub fn get(&self, id: &str) {}
+  pub async fn get(&self, id: &str) -> Result<(), surf::Error> {
+    Ok(())
+  }
 
-  pub fn get_comments(&self, id: &str) {}
+  pub async fn get_comments(&self, id: &str) -> Result<(), surf::Error> {
+    Ok(())
+  }
 
-  pub fn get_fans(&self, id: &str) {}
+  pub async fn get_fans(&self, id: &str) -> Result<(), surf::Error> {
+    Ok(())
+  }
 
-  pub fn get_tracks(&self, id: &str) {}
+  pub async fn get_tracks(&self, id: &str) -> Result<(), surf::Error> {
+    Ok(())
+  }
 }
