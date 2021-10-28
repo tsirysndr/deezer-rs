@@ -24,6 +24,12 @@ async fn main() {
   let radio_top = client.radio.get_top_radio().await;
   let radios_tracks = client.radio.get_tracks("6").await;
   let radios = client.radio.list().await;
+  let search = client.search.get("eminem").await;
+  let albums = client.search.get_albums("eminem").await;
+  let artists = client.search.get_artists("eminem").await;
+  let playlists = client.search.get_playlists("eminem").await;
+  let radio_results = client.search.get_radio("eminem").await;
+  let track_results = client.search.get_tracks("eminem").await;
 
   println!("{:#?}\n", album.unwrap());
   println!("{:#?}\n", fans.unwrap());
@@ -46,4 +52,10 @@ async fn main() {
   println!("{:#?}\n", radio_top.unwrap());
   println!("{:#?}\n", radios_tracks.unwrap());
   println!("{:#?}\n", radios.unwrap());
+  println!("{:#?}\n", search.unwrap());
+  println!("{:#?}\n", albums.unwrap());
+  println!("{:#?}\n", artists.unwrap());
+  println!("{:#?}\n", playlists.unwrap());
+  println!("{:#?}\n", radio_results.unwrap());
+  println!("{:#?}\n", track_results.unwrap());
 }

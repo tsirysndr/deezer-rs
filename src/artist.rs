@@ -18,7 +18,7 @@ pub struct Artist {
   pub picture_xl: String,
   pub nb_album: Option<u32>,
   pub nb_fan: Option<u32>,
-  pub radio: bool,
+  pub radio: Option<bool>,
   pub tracklist: String,
   pub r#type: String,
 }
