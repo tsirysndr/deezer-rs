@@ -30,6 +30,7 @@ async fn main() {
   let playlists = client.search.get_playlists("eminem").await;
   let radio_results = client.search.get_radio("eminem").await;
   let track_results = client.search.get_tracks("eminem").await;
+  let track = client.track.get("3135556").await;
 
   println!("{:#?}\n", album.unwrap());
   println!("{:#?}\n", fans.unwrap());
@@ -58,4 +59,5 @@ async fn main() {
   println!("{:#?}\n", playlists.unwrap());
   println!("{:#?}\n", radio_results.unwrap());
   println!("{:#?}\n", track_results.unwrap());
+  println!("{:#?}\n", track.unwrap());
 }

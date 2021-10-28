@@ -1,3 +1,5 @@
+use crate::album::Album;
+use crate::artist::Artist;
 use serde::Deserialize;
 use surf::Client;
 
@@ -16,6 +18,8 @@ pub struct Track {
     pub explicit_content_lyrics: Option<u32>,
     pub explicit_content_cover: Option<u32>,
     pub preview: String,
+    pub artist: Artist,
+    pub album: Option<Album>,
     pub r#type: String,
 }
 
@@ -35,5 +39,12 @@ impl TrackService {
         }
     }
 
-    pub fn get(&self, id: &str) {}
+    pub async fn get(&self, id: &str) -> Result<Track, surf::Error> {
+        let res = self
+            .client
+            .get(format!("/track/{}", id))
+            .recv_json::<Track>()
+            .await?;
+        Ok(res)
+    }
 }
