@@ -1,7 +1,8 @@
 use crate::album::Album;
 use crate::artist::Artist;
+use crate::BASE_URL;
+use reqwest::Client;
 use serde::Deserialize;
-use surf::Client;
 
 #[derive(Debug, Deserialize)]
 pub struct Track {
@@ -39,12 +40,12 @@ impl TrackService {
         }
     }
 
-    pub async fn get(&self, id: &str) -> Result<Track, surf::Error> {
-        let res = self
-            .client
-            .get(format!("/track/{}", id))
-            .recv_json::<Track>()
-            .await?;
-        Ok(res)
+    pub async fn get(&self, id: &str) -> Result<Track, reqwest::Error> {
+        self.client
+            .get(format!("{BASE_URL}/track/{}", id))
+            .send()
+            .await?
+            .json()
+            .await
     }
 }

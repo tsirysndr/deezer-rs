@@ -1,6 +1,7 @@
-use surf::Client;
+use reqwest::Client;
 
 pub struct InfosService {
+    #[allow(dead_code)]
     client: Client,
 }
 

@@ -1,6 +1,7 @@
 use crate::track::Tracks;
+use crate::BASE_URL;
+use reqwest::Client;
 use serde::Deserialize;
-use surf::Client;
 
 #[derive(Debug, Deserialize)]
 pub struct Radio {
@@ -33,35 +34,24 @@ impl RadioService {
         }
     }
 
-    pub async fn by_genre(&self) -> Result<Radios, surf::Error> {
-        let res = self
-            .client
-            .get("/radio/genres")
-            .recv_json::<Radios>()
-            .await?;
-        Ok(res)
+    pub async fn by_genre(&self) -> Result<Radios, reqwest::Error> {
+        self.client.get("/radio/genres").send().await?.json().await
     }
 
-    pub async fn get_top_radio(&self) -> Result<Radios, surf::Error> {
-        let res = self.client.get("/radio/top").recv_json::<Radios>().await?;
-        Ok(res)
+    pub async fn get_top_radio(&self) -> Result<Radios, reqwest::Error> {
+        self.client.get("/radio/top").send().await?.json().await
     }
 
-    pub async fn get_tracks(&self, id: &str) -> Result<Tracks, surf::Error> {
-        let res = self
-            .client
-            .get(format!("/radio/{}/tracks", id))
-            .recv_json::<Tracks>()
-            .await?;
-        Ok(res)
+    pub async fn get_tracks(&self, id: &str) -> Result<Tracks, reqwest::Error> {
+        self.client
+            .get(format!("{BASE_URL}/radio/{}/tracks", id))
+            .send()
+            .await?
+            .json()
+            .await
     }
 
-    pub async fn list(&self) -> Result<Radios, surf::Error> {
-        let res = self
-            .client
-            .get("/radio/lists")
-            .recv_json::<Radios>()
-            .await?;
-        Ok(res)
+    pub async fn list(&self) -> Result<Radios, reqwest::Error> {
+        self.client.get("/radio/lists").send().await?.json().await
     }
 }

@@ -1,6 +1,5 @@
-use std::convert::TryInto;
+use reqwest::Client;
 use std::time::Duration;
-use surf::{Client, Config, Url};
 
 pub mod album;
 pub mod artist;
@@ -15,6 +14,7 @@ pub mod search;
 pub mod track;
 pub mod user;
 
+// TODO: Only have one client and derive Clone
 pub struct Deezer {
     pub album: album::AlbumService,
     pub artist: artist::ArtistService,
@@ -30,14 +30,13 @@ pub struct Deezer {
     pub user: user::UserService,
 }
 
-const BASE_URL: &str = "https://api.deezer.com/";
+pub const BASE_URL: &str = "https://api.deezer.com/";
 
 impl Deezer {
     pub fn new() -> Self {
-        let client: Client = Config::new()
-            .set_base_url(Url::parse(BASE_URL).unwrap())
-            .set_timeout(Some(Duration::from_secs(5)))
-            .try_into()
+        let client = Client::builder()
+            .timeout(Duration::from_secs(5))
+            .build()
             .unwrap();
         Self {
             album: album::AlbumService::new(&client),
@@ -53,5 +52,11 @@ impl Deezer {
             track: track::TrackService::new(&client),
             user: user::UserService::new(&client),
         }
+    }
+}
+
+impl Default for Deezer {
+    fn default() -> Self {
+        Self::new()
     }
 }

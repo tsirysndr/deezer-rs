@@ -1,5 +1,5 @@
+use reqwest::Client;
 use serde::Deserialize;
-use surf::Client;
 
 #[derive(Debug, Deserialize)]
 pub struct User {
@@ -21,6 +21,7 @@ pub struct Users {
 }
 
 pub struct UserService {
+    #[allow(dead_code)]
     client: Client,
 }
 
