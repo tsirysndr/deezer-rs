@@ -9,7 +9,7 @@ use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 pub struct SearchResult {
-    pub id: u64,
+    pub id: i64,
     pub readable: bool,
     pub title: String,
     pub title_short: String,

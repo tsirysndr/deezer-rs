@@ -5,7 +5,7 @@ use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 pub struct Radio {
-    pub id: u64,
+    pub id: i64,
     pub title: String,
     pub description: Option<String>,
     pub share: Option<String>,

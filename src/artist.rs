@@ -8,7 +8,7 @@ use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 pub struct Artist {
-    pub id: u64,
+    pub id: i64,
     pub name: String,
     pub link: Option<String>,
     pub share: Option<String>,

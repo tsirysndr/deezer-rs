@@ -4,7 +4,7 @@ use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 pub struct Playlist {
-    pub id: u64,
+    pub id: i64,
     pub title: String,
     pub description: Option<String>,
     pub duration: Option<u32>,

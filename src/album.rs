@@ -6,7 +6,7 @@ use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 pub struct Album {
-    pub id: u64,
+    pub id: i64,
     pub title: String,
     pub upc: Option<String>,
     pub link: Option<String>,
