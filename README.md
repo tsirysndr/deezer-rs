@@ -31,9 +31,9 @@ use deezer_rs::Deezer;
 #[tokio::main]
 async fn main() {
   let client = Deezer::new();
-  let album = client.album.get("302127").await;
-  let tracks = client.album.get_tracks("302127").await;
-  let artist = client.artist.get("27").await;
+  let album = client.album().get("302127").await;
+  let tracks = client.album().get_tracks("302127").await;
+  let artist = client.artist().get("27").await;
   println!("{:#?}\n", album.unwrap());
   println!("{:#?}\n", tracks.unwrap());
   println!("{:#?}\n", artist.unwrap());

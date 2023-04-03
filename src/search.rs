@@ -21,6 +21,7 @@ pub struct SearchResult {
     pub preview: String,
     pub artist: Artist,
     pub album: Album,
+    pub md5_image: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -28,15 +29,13 @@ pub struct SearchResults {
     pub data: Vec<SearchResult>,
 }
 
-pub struct SearchService {
-    client: Client,
+pub struct SearchService<'a> {
+    client: &'a Client,
 }
 
-impl SearchService {
-    pub fn new(client: &Client) -> Self {
-        Self {
-            client: client.clone(),
-        }
+impl<'a> SearchService<'a> {
+    pub fn new(client: &'a Client) -> SearchService<'a> {
+        Self { client }
     }
 
     pub async fn get(&self, q: &str) -> Result<SearchResults, reqwest::Error> {

@@ -22,6 +22,7 @@ pub struct Track {
     pub artist: Artist,
     pub album: Option<Album>,
     pub r#type: String,
+    pub md5_image: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -29,15 +30,13 @@ pub struct Tracks {
     pub data: Vec<Track>,
 }
 
-pub struct TrackService {
-    client: Client,
+pub struct TrackService<'a> {
+    client: &'a Client,
 }
 
-impl TrackService {
-    pub fn new(client: &Client) -> Self {
-        Self {
-            client: client.clone(),
-        }
+impl<'a> TrackService<'a> {
+    pub fn new(client: &'a Client) -> TrackService<'a> {
+        Self { client }
     }
 
     pub async fn get(&self, id: &str) -> Result<Track, reqwest::Error> {
