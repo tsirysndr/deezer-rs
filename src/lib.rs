@@ -14,6 +14,8 @@ pub mod search;
 pub mod track;
 pub mod user;
 
+pub use reqwest::Error;
+
 #[derive(Clone)]
 pub struct Deezer {
     client: Client,
