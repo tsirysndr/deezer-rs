@@ -1,4 +1,6 @@
-use crate::track::Track;
+use crate::track::Tracks;
+use crate::user::User;
+use crate::BASE_URL;
 use reqwest::Client;
 use serde::Deserialize;
 
@@ -22,7 +24,8 @@ pub struct Playlist {
     pub picture_big: String,
     pub picture_xl: String,
     pub checksum: String,
-    pub tracks: Option<Vec<Track>>,
+    pub creator: Option<User>,
+    pub tracks: Option<Tracks>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -42,8 +45,17 @@ impl PlaylistService {
         }
     }
 
-    pub async fn get(&self, _id: &str) -> Result<(), reqwest::Error> {
-        Ok(())
+    pub async fn get(&self, id: &str) -> Result<Playlist, reqwest::Error> {
+        // checks if id is numeric
+        if !id.chars().all(|x| x.is_numeric()) {
+            panic!("Playlist id is not a number")
+        }
+        self.client
+            .get(format!("{BASE_URL}playlist/{}", id))
+            .send()
+            .await?
+            .json::<Playlist>()
+            .await
     }
 
     pub async fn get_comments(&self, _id: &str) -> Result<(), reqwest::Error> {

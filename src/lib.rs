@@ -39,6 +39,10 @@ impl Deezer {
     pub fn search(&self) -> search::SearchService {
         search::SearchService::new(&self.client)
     }
+
+    pub fn playlist(&self) -> playlist::PlaylistService {
+        playlist::PlaylistService::new(&self.client)
+    }
 }
 
 impl Default for Deezer {
