@@ -1,6 +1,7 @@
-use surf::Client;
+use reqwest::Client;
 
 pub struct OptionsService {
+    #[allow(dead_code)]
     client: Client,
 }
 
@@ -11,4 +12,3 @@ impl OptionsService {
         }
     }
 }
-

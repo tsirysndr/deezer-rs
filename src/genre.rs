@@ -1,6 +1,7 @@
 use crate::artist::Artists;
+use crate::BASE_URL;
+use reqwest::Client;
 use serde::Deserialize;
-use surf::Client;
 
 #[derive(Debug, Deserialize)]
 pub struct Genre {
@@ -29,26 +30,25 @@ impl GenreService {
         }
     }
 
-    pub async fn get(&self, id: &str) -> Result<Genre, surf::Error> {
-        let res = self
-            .client
-            .get(format!("/genre/{}", id))
-            .recv_json::<Genre>()
-            .await?;
-        Ok(res)
+    pub async fn get(&self, id: &str) -> Result<Genre, reqwest::Error> {
+        self.client
+            .get(format!("{BASE_URL}/genre/{}", id))
+            .send()
+            .await?
+            .json()
+            .await
     }
 
-    pub async fn list(&self) -> Result<Genres, surf::Error> {
-        let res = self.client.get("/genre").recv_json::<Genres>().await?;
-        Ok(res)
+    pub async fn list(&self) -> Result<Genres, reqwest::Error> {
+        self.client.get("/genre").send().await?.json().await
     }
 
-    pub async fn get_artists(&self, id: &str) -> Result<Artists, surf::Error> {
-        let res = self
-            .client
-            .get(format!("/genre/{}/artists", id))
-            .recv_json::<Artists>()
-            .await?;
-        Ok(res)
+    pub async fn get_artists(&self, id: &str) -> Result<Artists, reqwest::Error> {
+        self.client
+            .get(format!("{BASE_URL}/genre/{}/artists", id))
+            .send()
+            .await?
+            .json()
+            .await
     }
 }

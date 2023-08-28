@@ -1,11 +1,12 @@
 use crate::album::Album;
 use crate::artist::Artist;
+use crate::BASE_URL;
+use reqwest::Client;
 use serde::Deserialize;
-use surf::Client;
 
 #[derive(Debug, Deserialize)]
 pub struct Track {
-    pub id: u64,
+    pub id: i64,
     pub readable: Option<bool>,
     pub title: String,
     pub title_short: String,
@@ -21,6 +22,7 @@ pub struct Track {
     pub artist: Artist,
     pub album: Option<Album>,
     pub r#type: String,
+    pub md5_image: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -28,23 +30,21 @@ pub struct Tracks {
     pub data: Vec<Track>,
 }
 
-pub struct TrackService {
-    client: Client,
+pub struct TrackService<'a> {
+    client: &'a Client,
 }
 
-impl TrackService {
-    pub fn new(client: &Client) -> Self {
-        Self {
-            client: client.clone(),
-        }
+impl<'a> TrackService<'a> {
+    pub fn new(client: &'a Client) -> TrackService<'a> {
+        Self { client }
     }
 
-    pub async fn get(&self, id: &str) -> Result<Track, surf::Error> {
-        let res = self
-            .client
-            .get(format!("/track/{}", id))
-            .recv_json::<Track>()
-            .await?;
-        Ok(res)
+    pub async fn get(&self, id: &str) -> Result<Track, reqwest::Error> {
+        self.client
+            .get(format!("{BASE_URL}/track/{}", id))
+            .send()
+            .await?
+            .json()
+            .await
     }
 }

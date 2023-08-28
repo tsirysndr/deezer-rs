@@ -1,13 +1,14 @@
-use surf::Client;
+use reqwest::Client;
 
 pub struct EditorialService {
-  client: Client,
+    #[allow(dead_code)]
+    client: Client,
 }
 
 impl EditorialService {
-  pub fn new(client: &Client) -> Self {
-    Self {
-      client: client.clone(),
+    pub fn new(client: &Client) -> Self {
+        Self {
+            client: client.clone(),
+        }
     }
-  }
 }
