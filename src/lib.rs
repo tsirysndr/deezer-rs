@@ -43,6 +43,11 @@ impl Deezer {
     pub fn playlist(&self) -> playlist::PlaylistService {
         playlist::PlaylistService::new(&self.client)
     }
+
+    pub fn user(&self) -> user::UserService {
+        user::UserService::new(&self.client)
+    }
+
 }
 
 impl Default for Deezer {
