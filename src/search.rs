@@ -12,7 +12,7 @@ pub struct SearchResult {
   pub readable: bool,
   pub title: String,
   pub title_short: String,
-  pub title_version: String,
+  pub title_version: Option<String>,
   pub link: String,
   pub duration: u64,
   pub rank: u64,
